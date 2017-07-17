@@ -1,0 +1,16 @@
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        end=len(nums)-1
+        count=0
+        for i in range(len(nums)-1,-1,-1):
+            if nums[i]==val:                        
+                nums[i]=nums[end]
+                del nums[end]
+                end=end-1
+                count=count+1
+        return nums
