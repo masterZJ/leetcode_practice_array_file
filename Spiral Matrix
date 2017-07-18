@@ -1,0 +1,55 @@
+"""
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+
+For example,
+Given the following matrix:
+
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+You should return [1,2,3,6,9,8,7,4,5].
+"""
+
+mycode:
+
+class Solution(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        if not matrix:
+            return []
+        
+        rows=len(matrix)
+        columns=len(matrix[0])
+        re_list=[]
+        turn_1=columns-1  
+        turn_2=rows-1
+        turn_3=0
+        turn_4=0
+        while   turn_4<=turn_2 and turn_1>=turn_3:
+            if  turn_4<=turn_2 and turn_1>=turn_3:
+                for i in range(turn_3,turn_1+1):
+                    re_list.append(matrix[turn_4][i])
+                turn_4=turn_4+1
+            if turn_4<=turn_2 and turn_1>=turn_3 :
+                for i in range(turn_4,turn_2+1):
+                    re_list.append(matrix[i][turn_1])
+                turn_1=turn_1-1
+            if  turn_4<=turn_2 and turn_1>=turn_3:
+                for i in range(turn_1,turn_3-1,-1):
+                    re_list.append(matrix[turn_2][i])
+                turn_2=turn_2-1
+            if turn_4<=turn_2 and turn_1>=turn_3 :
+                for i in range(turn_2,turn_4-1,-1):
+                    re_list.append(matrix[i][turn_3])
+                turn_3=turn_3+1
+
+        return re_list
+        
+others code:
+def spiralOrder(self, matrix):
+    return matrix and list(matrix.pop(0)) + self.spiralOrder(zip(*matrix)[::-1])
